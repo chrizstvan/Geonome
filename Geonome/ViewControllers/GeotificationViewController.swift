@@ -7,24 +7,42 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+
+struct PreferencesKeys {
+  static let savedItems = "savedItems"
+}
 
 class GeotificationViewController: UIViewController {
-
+    @IBOutlet weak var mapView: MKMapView!
+    
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        determineMyCurrentLocation()
     }
     
+    // new added 2
+    private func determineMyCurrentLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+      
+      mapView.showsUserLocation = true
+      mapView.userTrackingMode = .follow
     }
-    */
+}
 
+extension GeotificationViewController: CLLocationManagerDelegate {
+    // new added 3
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+      mapView.showsUserLocation = (status == .authorizedWhenInUse || status == .authorizedAlways)
+      mapView.userTrackingMode = .follow
+    }
 }
