@@ -126,6 +126,9 @@
                                                     <rect key="frame" x="76" y="21.5" width="322" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textFieldEditingChanged:" destination="1AZ-ag-bIw" eventType="editingChanged" id="XR4-fi-Sv9"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -154,6 +157,9 @@
                                                     <rect key="frame" x="77" y="13" width="321" height="18.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textFieldEditingChanged:" destination="1AZ-ag-bIw" eventType="editingDidEnd" id="Ela-Nd-aSZ"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -174,12 +180,32 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Geotification" id="7ul-H3-Vua">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="FtC-0H-5lO"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="FtC-0H-5lO">
+                            <connections>
+                                <action selector="onCancel:" destination="1AZ-ag-bIw" id="BDa-HX-gcu"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Add" id="vPY-6o-SQY"/>
-                            <barButtonItem title="Item" image="CurrentLocation" id="Vid-Zf-nmZ"/>
+                            <barButtonItem title="Add" id="vPY-6o-SQY">
+                                <connections>
+                                    <action selector="onAdd:" destination="1AZ-ag-bIw" id="yFq-CT-GVF"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="CurrentLocation" id="Vid-Zf-nmZ">
+                                <connections>
+                                    <action selector="onZoomCurrentLocation:" destination="1AZ-ag-bIw" id="Q2U-ku-v4q"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="vPY-6o-SQY" id="xog-16-Lz6"/>
+                        <outlet property="eventTypeSegmentedControl" destination="nCW-Ad-Tig" id="W9d-go-uoX"/>
+                        <outlet property="mapView" destination="5qT-ba-7WL" id="8ut-GL-asX"/>
+                        <outlet property="noteTextField" destination="1dV-ho-mP9" id="laF-6X-ayy"/>
+                        <outlet property="radiusTextField" destination="TOV-4A-Pdr" id="2or-nF-Pjy"/>
+                        <outlet property="zoomButton" destination="Vid-Zf-nmZ" id="hdm-G0-jpW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lNZ-8j-8ml" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

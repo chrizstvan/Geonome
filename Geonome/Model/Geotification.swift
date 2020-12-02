@@ -39,6 +39,14 @@ class Geotification: NSObject, Codable, MKAnnotation {
         return "Radius: \(radius)m - \(eventTypeString)"
     }
     
+    init(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String, note: String, eventType: EventType) {
+      self.coordinate = coordinate
+      self.radius = radius
+      self.identifier = identifier
+      self.note = note
+      self.eventType = eventType
+    }
+    
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let latitude = try values.decode(Double.self, forKey: .latitude)

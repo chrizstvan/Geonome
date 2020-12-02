@@ -7,29 +7,56 @@
 //
 
 import UIKit
+import MapKit
+
+protocol AddGeotificationDelegate {
+    func addGeotificationDelegate(
+      _ controller: AddGeoficationViewController,
+      didAddCoordinate coordinate: CLLocationCoordinate2D,
+      radius: Double,
+      identifier: String,
+      note: String,
+      eventType: Geotification.EventType
+    )
+}
 
 class AddGeoficationViewController: UITableViewController {
-
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var eventTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var radiusTextField: UITextField!
+    @IBOutlet weak var noteTextField: UITextField!
+    @IBOutlet var addButton: UIBarButtonItem!
+    @IBOutlet var zoomButton: UIBarButtonItem!
+    
+    var delegate: AddGeotificationDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItems = [addButton, zoomButton]
         tableView.tableFooterView = UIView()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        addButton.isEnabled = false
     }
 
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 1
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 3
-//    }
-
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+        addButton.isEnabled = !radiusTextField.text!.isEmpty && !noteTextField.text!.isEmpty
+    }
+    
+    @IBAction func onCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onAdd(_ sender: AnyObject) {
+        print("add tapped")
+        let coordinate = mapView.centerCoordinate
+        let radius = Double(radiusTextField.text!) ?? 0
+        let identifier = NSUUID().uuidString
+        let note = noteTextField.text
+        let eventType: Geotification.EventType = (eventTypeSegmentedControl.selectedSegmentIndex == 0) ? .onEntry : .onExit
+        delegate?.addGeotificationDelegate(self, didAddCoordinate: coordinate, radius: radius, identifier: identifier, note: note!, eventType: eventType)
+    }
+    
+    @IBAction func onZoomCurrentLocation(_ sender: AnyObject) {
+        mapView.zoomToUserLocation()
+    }
+    
 }
