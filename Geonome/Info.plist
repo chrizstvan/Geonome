@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Test</string>
+	<string>Geonome requires constant access to your phone’s location to notify you when you enter or leave a geofence.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Test</string>
+	<string>Geonome requires constant access to your phone’s location to notify you when you enter or leave a geofence.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Test</string>
+	<string>Geonome requires constant access to your phone’s location to notify you when you enter or leave a geofence.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

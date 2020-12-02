@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8BB9B3D425775CDF002C1D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */; };
 		8BB9B3D625775CDF002C1D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */; };
-		8BB9B3D825775CDF002C1D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D725775CDF002C1D56 /* ViewController.swift */; };
 		8BB9B3DB25775CDF002C1D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D925775CDF002C1D56 /* Main.storyboard */; };
 		8BB9B3DD25775CE2002C1D56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3DC25775CE2002C1D56 /* Assets.xcassets */; };
 		8BB9B3E025775CE2002C1D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3DE25775CE2002C1D56 /* LaunchScreen.storyboard */; };
@@ -26,7 +25,6 @@
 		8BB9B3D025775CDF002C1D56 /* Geonome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8BB9B3D725775CDF002C1D56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8BB9B3DA25775CDF002C1D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8BB9B3DC25775CE2002C1D56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BB9B3DF25775CE2002C1D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -70,14 +68,13 @@
 		8BB9B3D225775CDF002C1D56 /* Geonome */ = {
 			isa = PBXGroup;
 			children = (
-				8BB9B3F52577C8E4002C1D56 /* Suporting File */,
+				8BB9B3F52577C8E4002C1D56 /* Dummy Data */,
 				8BB9B3F22577BFCF002C1D56 /* Utils */,
 				8BB9B3E9257775D6002C1D56 /* ViewControllers */,
 				8BB9B3E8257775CF002C1D56 /* ViewModels */,
 				8BB9B3E7257775C5002C1D56 /* Model */,
 				8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */,
 				8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */,
-				8BB9B3D725775CDF002C1D56 /* ViewController.swift */,
 				8BB9B3D925775CDF002C1D56 /* Main.storyboard */,
 				8BB9B3DC25775CE2002C1D56 /* Assets.xcassets */,
 				8BB9B3DE25775CE2002C1D56 /* LaunchScreen.storyboard */,
@@ -118,14 +115,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		8BB9B3F52577C8E4002C1D56 /* Suporting File */ = {
+		8BB9B3F52577C8E4002C1D56 /* Dummy Data */ = {
 			isa = PBXGroup;
 			children = (
 				8BB9B3F72577C956002C1D56 /* Home.gpx */,
 				8BB9B3F82577C956002C1D56 /* SimulatedLocations.gpx */,
 				8BB9B3F62577C956002C1D56 /* Zoo.gpx */,
 			);
-			path = "Suporting File";
+			path = "Dummy Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +202,6 @@
 				8BB9B3F42577BFDE002C1D56 /* Utility.swift in Sources */,
 				8BB9B3EB25777609002C1D56 /* GeotificationViewController.swift in Sources */,
 				8BB9B3EF25778561002C1D56 /* AddGeoficationViewController.swift in Sources */,
-				8BB9B3D825775CDF002C1D56 /* ViewController.swift in Sources */,
 				8BB9B3F125779707002C1D56 /* Geotification.swift in Sources */,
 				8BB9B3D425775CDF002C1D56 /* AppDelegate.swift in Sources */,
 				8BB9B3D625775CDF002C1D56 /* SceneDelegate.swift in Sources */,

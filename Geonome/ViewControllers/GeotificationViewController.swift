@@ -144,10 +144,18 @@ class GeotificationViewController: UIViewController {
             locationManager.stopMonitoring(for: circularRegion)
         }
     }
+    
+    @IBAction func zoomCurrentLocation(_ sender: Any) {
+        print("Zoom")
+        mapView.zoomToUserLocation()
+    }
+    
 }
 
 extension GeotificationViewController: AddGeotificationDelegate {
     func addGeotificationDelegate(_ controller: AddGeoficationViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String, note: String, eventType: Geotification.EventType) {
+        print("add tapped")
+
         controller.dismiss(animated: true, completion: nil)
         let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance) // new added 9
         let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
@@ -167,8 +175,8 @@ extension GeotificationViewController: CLLocationManagerDelegate {
     // new added 4
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
-        print("user latitude = \(userLocation.coordinate.latitude)")
-        print("user longitude = \(userLocation.coordinate.longitude)")
+//        print("user latitude = \(userLocation.coordinate.latitude)")
+//        print("user longitude = \(userLocation.coordinate.longitude)")
     }
     
     // GE 1
@@ -206,6 +214,7 @@ extension GeotificationViewController: MKMapViewDelegate {
     
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        print("detct")
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0

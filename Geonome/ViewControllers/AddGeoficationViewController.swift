@@ -25,8 +25,8 @@ class AddGeoficationViewController: UITableViewController {
     @IBOutlet weak var eventTypeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextField!
-    @IBOutlet var addButton: UIBarButtonItem!
-    @IBOutlet var zoomButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var zoomButton: UIBarButtonItem!
     
     var delegate: AddGeotificationDelegate?
     
@@ -35,6 +35,8 @@ class AddGeoficationViewController: UITableViewController {
         navigationItem.rightBarButtonItems = [addButton, zoomButton]
         tableView.tableFooterView = UIView()
         addButton.isEnabled = false
+        
+        mapView.showsUserLocation = true
     }
 
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
@@ -46,7 +48,6 @@ class AddGeoficationViewController: UITableViewController {
     }
     
     @IBAction func onAdd(_ sender: AnyObject) {
-        print("add tapped")
         let coordinate = mapView.centerCoordinate
         let radius = Double(radiusTextField.text!) ?? 0
         let identifier = NSUUID().uuidString

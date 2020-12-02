@@ -7,21 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Geonome" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="139" y="130"/>
-        </scene>
         <!--Geotification: 0-->
         <scene sceneID="UTf-MN-gPK">
             <objects>
@@ -30,8 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LqC-Yn-NyN">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqC-Yn-NyN">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vLU-y5-ox6" id="DOk-Z7-dhC"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -44,10 +32,14 @@
                         <viewLayoutGuide key="safeArea" id="Vnh-5d-JaQ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Geotification: 0" id="Vt4-o5-O2Y">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="CurrentLocation" id="KoE-Fl-ALL"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="CurrentLocation" id="KoE-Fl-ALL">
+                            <connections>
+                                <action selector="zoomCurrentLocation:" destination="vLU-y5-ox6" id="svY-3v-tKc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tg6-bg-7cN">
                             <connections>
-                                <segue destination="qob-LM-bpk" kind="presentation" id="Ozp-QB-zao"/>
+                                <segue destination="qob-LM-bpk" kind="presentation" identifier="addGeotification" id="Ozp-QB-zao"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -85,8 +77,11 @@
                                                         <segment title="Exit"/>
                                                     </segments>
                                                 </segmentedControl>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5qT-ba-7WL">
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qT-ba-7WL">
                                                     <rect key="frame" x="0.0" y="55" width="414" height="183"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="cNg-Xa-EbG" id="gcp-HA-LQd"/>
+                                                    </connections>
                                                 </mapView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddPin" translatesAutoresizingMaskIntoConstraints="NO" id="uaC-QQ-7Xx">
                                                     <rect key="frame" x="169.5" y="109" width="75" height="75"/>
