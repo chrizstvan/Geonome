@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
 class GeotificationViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
@@ -21,7 +20,14 @@ class GeotificationViewController: UIViewController {
         super.viewDidLoad()
         mapView.delegate = self
         determineMyCurrentLocation()
-        viewModel.loadAllGeotifications(mapView: mapView, mainView: self)
+        configureViewModel()
+        viewModel.loadAllGeotifications()
+    }
+    
+    private func configureViewModel() {
+        viewModel.mapView = self.mapView
+        viewModel.locationManager = self.locationManager
+        viewModel.view = self
     }
     
     private func determineMyCurrentLocation() {
@@ -41,29 +47,12 @@ class GeotificationViewController: UIViewController {
         if segue.identifier == Constant.addGeotificationSegue {
             let navigationController = segue.destination as! UINavigationController
             let vc = navigationController.viewControllers.first as! AddGeoficationViewController
-            vc.delegate = self
+            vc.delegate = viewModel
         }
     }
     
     @IBAction func zoomCurrentLocation(_ sender: Any) {
-        print("Zoom")
         mapView.zoomToUserLocation()
-    }
-}
-
-extension GeotificationViewController: AddGeotificationDelegate {
-    func addGeotificationDelegate(_ controller: AddGeoficationViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String, note: String, eventType: Geotification.EventType) {
-
-        viewModel.geotificationDidAdd(
-            mapView: mapView,
-            view: self,
-            controller: controller,
-            locationManager: locationManager,
-            coordinate: coordinate,
-            radius: radius,
-            identifier: identifier,
-            note: note,
-            eventType: eventType)
     }
 }
 
@@ -107,6 +96,7 @@ extension GeotificationViewController: MKMapViewDelegate {
     
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        // showing geotification circle
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0
@@ -120,14 +110,8 @@ extension GeotificationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         // Delete geotification
         let geotification = view.annotation as! Geotification
-        viewModel.stopMonitoring(
-            geotification: geotification,
-            locationManager: locationManager
-        ) // new added 12
-        viewModel.remove(
-            geotification: geotification,
-            mapView: mapView, view: self
-        )
+        viewModel.stopMonitoring(geotification: geotification) // new added 12
+        viewModel.remove(geotification)
         viewModel.saveAllGeotifications()
     }
 }

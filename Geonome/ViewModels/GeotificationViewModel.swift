@@ -11,15 +11,19 @@ import MapKit
 import CoreLocation
 
 final class GeotificationViewModel {
+    var mapView: MKMapView?
+    var view: UIViewController?
+    var locationManager: CLLocationManager?
     var geotifications: [Geotification] = []
     
-    //Loading and saving func
-    func loadAllGeotifications(mapView: MKMapView, mainView: UIViewController) {
+    // Loading all geotification data feom user default
+    func loadAllGeotifications() {
         geotifications.removeAll()
         let allGeotifications = Geotification.allGeotifications()
-        allGeotifications.forEach { add(geotification: $0, mapView: mapView, view: mainView) }
+        allGeotifications.forEach { add($0) }
     }
     
+    // Saving all geotification to user default
     func saveAllGeotifications() {
         let encoder = JSONEncoder()
         do {
@@ -31,19 +35,22 @@ final class GeotificationViewModel {
     }
     
     // Functions that update the model/associated views with geotification changes
-    private func add(geotification: Geotification, mapView: MKMapView, view: UIViewController) {
+    private func add(_ geotification: Geotification) {
+        guard let mapView = self.mapView else { return }
         geotifications.append(geotification)
         mapView.addAnnotation(geotification)
         addRadiusOverlay(forGeotification: geotification, mapView: mapView)
-        updateGeotificationsCount(view: view)
+        updateGeotificationsCount()
     }
     
-    func remove(geotification: Geotification, mapView: MKMapView, view: UIViewController) {
-        guard let index = geotifications.firstIndex(of: geotification) else { return }
+    // remove handle removing geotification data, radius and annotation
+    func remove(_ geotification: Geotification) {
+        guard let index = geotifications.firstIndex(of: geotification), let mapView = self.mapView
+            else { return }
         geotifications.remove(at: index)
         mapView.removeAnnotation(geotification)
-        removeRadiusOverlay(forGeotification: geotification, mapView: mapView)
-        updateGeotificationsCount(view: view)
+        removeRadiusOverlay(forGeotification: geotification)
+        updateGeotificationsCount()
     }
     
     // Map overlay functions
@@ -51,8 +58,9 @@ final class GeotificationViewModel {
         mapView.addOverlay(MKCircle(center: geotification.coordinate, radius: geotification.radius))
     }
     
-    func removeRadiusOverlay(forGeotification geotification: Geotification, mapView: MKMapView) {
+    func removeRadiusOverlay(forGeotification geotification: Geotification) {
         // Find exactly one overlay which has the same coordinates & radius to remove
+        guard let mapView = self.mapView else { return }
         let overlays = mapView.overlays
         for overlay in overlays {
             guard let circleOverlay = overlay as? MKCircle else { continue }
@@ -65,15 +73,14 @@ final class GeotificationViewModel {
     }
     
     // Update title
-    private func updateGeotificationsCount(view: UIViewController) {
+    private func updateGeotificationsCount() {
+        guard let view = self.view else { return }
         view.title = "Geotifications: \(geotifications.count)"
         view.navigationItem.rightBarButtonItem?.isEnabled = (geotifications.count < 20) // new added 11
     }
     
     // add geotification
     func geotificationDidAdd(
-        mapView: MKMapView,
-        view: UIViewController,
         controller: AddGeoficationViewController,
         locationManager: CLLocationManager,
         coordinate: CLLocationCoordinate2D,
@@ -85,8 +92,8 @@ final class GeotificationViewModel {
         controller.dismiss(animated: true, completion: nil)
         let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance) // new added 9
         let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
-        add(geotification: geotification, mapView: mapView, view: view)
-        startMonitoring(geotification: geotification, view: view, locationManager: locationManager)     // new added 10
+        add(geotification)
+        startMonitoring(geotification: geotification) // new added 10
         saveAllGeotifications()
     }
     
@@ -103,7 +110,8 @@ final class GeotificationViewModel {
     }
     
     // new added 7
-    func startMonitoring(geotification: Geotification, view: UIViewController, locationManager: CLLocationManager) {
+    func startMonitoring(geotification: Geotification) {
+        guard let view = self.view, let locationManager = self.locationManager else { return }
         // 1
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             view.showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
@@ -124,11 +132,31 @@ final class GeotificationViewModel {
     }
     
     // new added 8
-    func stopMonitoring(geotification: Geotification, locationManager: CLLocationManager) {
+    func stopMonitoring(geotification: Geotification) {
+        guard let locationManager = self.locationManager else { return }
         for region in locationManager.monitoredRegions {
             guard let circularRegion = region as? CLCircularRegion,
                 circularRegion.identifier == geotification.identifier else { continue }
             locationManager.stopMonitoring(for: circularRegion)
         }
+    }
+}
+
+extension GeotificationViewModel: AddGeotificationDelegate {
+    func addGeotificationDelegate(
+        _ controller: AddGeoficationViewController,
+        didAddCoordinate coordinate: CLLocationCoordinate2D,
+        radius: Double,
+        identifier: String,
+        note: String,
+        eventType: Geotification.EventType
+    ) {
+        guard let locationManager = self.locationManager else { return }
+        controller.dismiss(animated: true, completion: nil)
+        let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance) // new added 9
+        let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
+        add(geotification)
+        startMonitoring(geotification: geotification)     // new added 10
+        saveAllGeotifications()
     }
 }
