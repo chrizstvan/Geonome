@@ -10,16 +10,13 @@
         <!--Geotification: 0-->
         <scene sceneID="UTf-MN-gPK">
             <objects>
-                <viewController id="vLU-y5-ox6" customClass="GeotificationViewController" customModule="Geonome" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GeotificationViewController" id="vLU-y5-ox6" customClass="GeotificationViewController" customModule="Geonome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R25-t8-gLK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqC-Yn-NyN">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vLU-y5-ox6" id="DOk-Z7-dhC"/>
-                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

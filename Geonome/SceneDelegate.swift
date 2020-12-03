@@ -30,7 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        //application.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
@@ -94,14 +93,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLCircularRegion {
-            print("masuk enter")
             handleEvent(for: region)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         if region is CLCircularRegion {
-            print("masuk exit")
             handleEvent(for: region)
         }
     }

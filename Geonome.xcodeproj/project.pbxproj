@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B5D30F82578801600FC5257 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D30F72578801600FC5257 /* Constant.swift */; };
+		8B5D30FC25788C6C00FC5257 /* GeotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D30FB25788C6C00FC5257 /* GeotificationViewModel.swift */; };
 		8BB9B3D425775CDF002C1D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */; };
 		8BB9B3D625775CDF002C1D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */; };
 		8BB9B3DB25775CDF002C1D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D925775CDF002C1D56 /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B5D30F72578801600FC5257 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		8B5D30FB25788C6C00FC5257 /* GeotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotificationViewModel.swift; sourceTree = "<group>"; };
 		8BB9B3D025775CDF002C1D56 /* Geonome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		8BB9B3E8257775CF002C1D56 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				8B5D30FB25788C6C00FC5257 /* GeotificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				8BB9B3F32577BFDE002C1D56 /* Utility.swift */,
+				8B5D30F72578801600FC5257 /* Constant.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -199,11 +205,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B5D30F82578801600FC5257 /* Constant.swift in Sources */,
 				8BB9B3F42577BFDE002C1D56 /* Utility.swift in Sources */,
 				8BB9B3EB25777609002C1D56 /* GeotificationViewController.swift in Sources */,
 				8BB9B3EF25778561002C1D56 /* AddGeoficationViewController.swift in Sources */,
 				8BB9B3F125779707002C1D56 /* Geotification.swift in Sources */,
 				8BB9B3D425775CDF002C1D56 /* AppDelegate.swift in Sources */,
+				8B5D30FC25788C6C00FC5257 /* GeotificationViewModel.swift in Sources */,
 				8BB9B3D625775CDF002C1D56 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
