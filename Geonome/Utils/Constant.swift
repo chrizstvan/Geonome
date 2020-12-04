@@ -13,6 +13,12 @@ struct PreferencesKeys {
 }
 
 struct Constant {
+    static let errorTitle = "Error"
     static let addGeotificationSegue = "addGeotification"
     static let annotationIdentifier = "myGeotification"
+    static let locationNotAuthMessages = """
+    Your geotification is saved but will only be activated once you grant
+    Geotify permission to access the device location.
+    """
+    static let monitoringNotAvailableMessages = "Geofencing is not supported on this device!"
 }

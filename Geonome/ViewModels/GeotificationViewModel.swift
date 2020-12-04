@@ -34,7 +34,7 @@ final class GeotificationViewModel {
         }
     }
     
-    // Functions that update the model/associated views with geotification changes
+    // add is functions that update the model/associated views with geotification changes
     private func add(_ geotification: Geotification) {
         guard let mapView = self.mapView else { return }
         geotifications.append(geotification)
@@ -53,11 +53,12 @@ final class GeotificationViewModel {
         updateGeotificationsCount()
     }
     
-    // Map overlay functions
+    // addRadiusOverlay handle draw radius to map view
     private func addRadiusOverlay(forGeotification geotification: Geotification, mapView: MKMapView) {
         mapView.addOverlay(MKCircle(center: geotification.coordinate, radius: geotification.radius))
     }
     
+    // removeRadiusOverlay handle remove overlay from map view
     func removeRadiusOverlay(forGeotification geotification: Geotification) {
         // Find exactly one overlay which has the same coordinates & radius to remove
         guard let mapView = self.mapView else { return }
@@ -72,66 +73,41 @@ final class GeotificationViewModel {
         }
     }
     
-    // Update title
+    // updateGeotificationsCount handle updating title text and validate geotification number
     private func updateGeotificationsCount() {
         guard let view = self.view else { return }
         view.title = "Geotifications: \(geotifications.count)"
-        view.navigationItem.rightBarButtonItem?.isEnabled = (geotifications.count < 20) // new added 11
+        view.navigationItem.rightBarButtonItem?.isEnabled = (geotifications.count < 20) // for this case
     }
     
-    // add geotification
-    func geotificationDidAdd(
-        controller: AddGeoficationViewController,
-        locationManager: CLLocationManager,
-        coordinate: CLLocationCoordinate2D,
-        radius: Double,
-        identifier: String,
-        note: String,
-        eventType: Geotification.EventType
-    ) {
-        controller.dismiss(animated: true, completion: nil)
-        let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance) // new added 9
-        let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
-        add(geotification)
-        startMonitoring(geotification: geotification) // new added 10
-        saveAllGeotifications()
-    }
-    
-    // new added 6
+    // region define location boundaries based on geotification
     func region(with geotification: Geotification) -> CLCircularRegion {
-        // 1
         let region = CLCircularRegion(center: geotification.coordinate,
                                       radius: geotification.radius,
                                       identifier: geotification.identifier)
-        // 2
         region.notifyOnEntry = (geotification.eventType == .onEntry)
         region.notifyOnExit = !region.notifyOnEntry
         return region
     }
     
-    // new added 7
+    // startMonitoring handle start of monitoring for area that user has define it before
     func startMonitoring(geotification: Geotification) {
         guard let view = self.view, let locationManager = self.locationManager else { return }
-        // 1
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            view.showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
+            view.showAlert(withTitle: Constant.errorTitle, message: Constant.monitoringNotAvailableMessages)
             return
         }
-        // 2
+        
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            let message = """
-          Your geotification is saved but will only be activated once you grant
-          Geotify permission to access the device location.
-          """
+            let message = Constant.locationNotAuthMessages
             view.showAlert(withTitle:"Warning", message: message)
         }
-        // 3
+        
         let fenceRegion = region(with: geotification)
-        // 4
         locationManager.startMonitoring(for: fenceRegion)
     }
     
-    // new added 8
+    // stopMonitoring handle start of monitoring for area that user has define it before
     func stopMonitoring(geotification: Geotification) {
         guard let locationManager = self.locationManager else { return }
         for region in locationManager.monitoredRegions {
