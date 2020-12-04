@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class GeotificationViewController: UIViewController {
+class GeotificationViewController: UIViewController, Storyboarded {
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
@@ -57,18 +57,15 @@ class GeotificationViewController: UIViewController {
 }
 
 extension GeotificationViewController: CLLocationManagerDelegate {
-    // new added 3
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         mapView.showsUserLocation = (status == .authorizedWhenInUse || status == .authorizedAlways)
         mapView.userTrackingMode = .follow
     }
     
-    // GE 1
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
         print("Monitoring failed for region with identifier: \(region!.identifier)")
     }
     
-    // GE 2
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location Manager failed with the following error: \(error)")
     }
@@ -110,7 +107,7 @@ extension GeotificationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         // Delete geotification
         let geotification = view.annotation as! Geotification
-        viewModel.stopMonitoring(geotification: geotification) // new added 12
+        viewModel.stopMonitoring(geotification: geotification)
         viewModel.remove(geotification)
         viewModel.saveAllGeotifications()
     }

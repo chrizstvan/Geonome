@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let error = error {
                     print("Error: \(error)")
                 }
-        }
+            }
         
         return true
     }

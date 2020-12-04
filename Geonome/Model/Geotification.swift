@@ -11,11 +11,6 @@ import MapKit
 import CoreLocation
 
 class Geotification: NSObject, Codable, MKAnnotation {
-    enum EventType: String {
-        case onEntry = "On Entry"
-        case onExit = "On Exit"
-    }
-    
     enum CodingKeys: String, CodingKey {
         case latitude, longitude, radius, identifier, note, eventType
     }
@@ -24,7 +19,6 @@ class Geotification: NSObject, Codable, MKAnnotation {
     var radius: CLLocationDistance
     var identifier: String
     var note: String
-    var eventType: EventType
     
     var title: String? {
         if note.isEmpty {
@@ -35,16 +29,19 @@ class Geotification: NSObject, Codable, MKAnnotation {
     }
     
     var subtitle: String? {
-        let eventTypeString = eventType.rawValue
-        return "Radius: \(radius)m - \(eventTypeString)"
+        "Radius: \(radius)m - \(note) Area"
     }
     
-    init(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String, note: String, eventType: EventType) {
+    init(
+        coordinate: CLLocationCoordinate2D,
+        radius: CLLocationDistance,
+        identifier: String,
+        note: String
+    ) {
       self.coordinate = coordinate
       self.radius = radius
       self.identifier = identifier
       self.note = note
-      self.eventType = eventType
     }
     
     required init(from decoder: Decoder) throws {
@@ -55,8 +52,6 @@ class Geotification: NSObject, Codable, MKAnnotation {
         radius = try values.decode(Double.self, forKey: .radius)
         identifier = try values.decode(String.self, forKey: .identifier)
         note = try values.decode(String.self, forKey: .note)
-        let event = try values.decode(String.self, forKey: .eventType)
-        eventType = EventType(rawValue: event) ?? .onEntry
     }
     
     func encode(to encoder: Encoder) throws {
@@ -66,18 +61,21 @@ class Geotification: NSObject, Codable, MKAnnotation {
         try container.encode(radius, forKey: .radius)
         try container.encode(identifier, forKey: .identifier)
         try container.encode(note, forKey: .note)
-        try container.encode(eventType.rawValue, forKey: .eventType)
     }
 }
 
 // should be at view model
 extension Geotification {
   public class func allGeotifications() -> [Geotification] {
-    guard let savedData = UserDefaults.standard.data(forKey: PreferencesKeys.savedItems) else { return [] }
+    guard let savedData = UserDefaults.standard.data(forKey: PreferencesKeys.savedItems) else {
+        return []
+    }
+    
     let decoder = JSONDecoder()
     if let savedGeotifications = try? decoder.decode(Array.self, from: savedData) as [Geotification] {
       return savedGeotifications
     }
+    
     return []
   }
 }

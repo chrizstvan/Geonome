@@ -59,7 +59,7 @@ final class GeotificationViewModel {
     }
     
     // removeRadiusOverlay handle remove overlay from map view
-    func removeRadiusOverlay(forGeotification geotification: Geotification) {
+    private func removeRadiusOverlay(forGeotification geotification: Geotification) {
         // Find exactly one overlay which has the same coordinates & radius to remove
         guard let mapView = self.mapView else { return }
         let overlays = mapView.overlays
@@ -76,24 +76,20 @@ final class GeotificationViewModel {
     // updateGeotificationsCount handle updating title text and validate geotification number
     private func updateGeotificationsCount() {
         guard let view = self.view else { return }
-        view.title = "Geotifications: \(geotifications.count)"
         view.navigationItem.rightBarButtonItem?.isEnabled = (geotifications.count < 20) // for this case
-        
     }
     
-    
     // region define location boundaries based on geotification
-    func region(with geotification: Geotification) -> CLCircularRegion {
+    private func region(with geotification: Geotification) -> CLCircularRegion {
         let region = CLCircularRegion(center: geotification.coordinate,
                                       radius: geotification.radius,
                                       identifier: geotification.identifier)
-        region.notifyOnEntry = (geotification.eventType == .onEntry)
-        region.notifyOnExit = !region.notifyOnEntry
+        
         return region
     }
     
     // startMonitoring handle start of monitoring for area that user has define it before
-    func startMonitoring(geotification: Geotification) {
+    private func startMonitoring(geotification: Geotification) {
         guard let view = self.view, let locationManager = self.locationManager else { return }
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             view.showAlert(withTitle: Constant.errorTitle, message: Constant.monitoringNotAvailableMessages)
@@ -126,13 +122,12 @@ extension GeotificationViewModel: AddGeotificationDelegate {
         didAddCoordinate coordinate: CLLocationCoordinate2D,
         radius: Double,
         identifier: String,
-        note: String,
-        eventType: Geotification.EventType
+        note: String
     ) {
         guard let locationManager = self.locationManager else { return }
         controller.dismiss(animated: true, completion: nil)
         let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance)
-        let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
+        let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note)
         add(geotification)
         startMonitoring(geotification: geotification)
         saveAllGeotifications()
