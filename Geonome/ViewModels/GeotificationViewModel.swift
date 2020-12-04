@@ -78,7 +78,9 @@ final class GeotificationViewModel {
         guard let view = self.view else { return }
         view.title = "Geotifications: \(geotifications.count)"
         view.navigationItem.rightBarButtonItem?.isEnabled = (geotifications.count < 20) // for this case
+        
     }
+    
     
     // region define location boundaries based on geotification
     func region(with geotification: Geotification) -> CLCircularRegion {
@@ -129,10 +131,10 @@ extension GeotificationViewModel: AddGeotificationDelegate {
     ) {
         guard let locationManager = self.locationManager else { return }
         controller.dismiss(animated: true, completion: nil)
-        let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance) // new added 9
+        let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance)
         let geotification = Geotification(coordinate: coordinate, radius: clampedRadius, identifier: identifier, note: note, eventType: eventType)
         add(geotification)
-        startMonitoring(geotification: geotification)     // new added 10
+        startMonitoring(geotification: geotification)
         saveAllGeotifications()
     }
 }
