@@ -9,27 +9,41 @@
 import UIKit
 import MapKit
 import CoreLocation
+import SystemConfiguration.CaptiveNetwork
+
+protocol GeotifViewProtocol: class {
+    func setGeofence(mapView: MKMapView, isMaxGeotification: Bool)
+    func removeGeofence(mapView: MKMapView, isMaxGeotification: Bool)
+    func showNeededAlert(_ view: UIViewController)
+}
 
 class GeotificationViewController: UIViewController, Storyboarded {
     @IBOutlet weak var mapView: MKMapView!
-    
-    let locationManager = CLLocationManager()
-    var viewModel = GeotificationViewModel()
+    var locationManager: CLLocationManager!
+    var interactor: GeotifInteractorProtocol!
+    var geotifVM = [GeotificationViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         determineMyCurrentLocation()
-        configureViewModel()
-        viewModel.loadAllGeotifications()
+        interactor.loadAllGeotification(mapView: mapView)
     }
     
-    private func configureViewModel() {
-        viewModel.mapView = self.mapView
-        viewModel.locationManager = self.locationManager
-        viewModel.view = self
+    func getWiFiName() -> String? {
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        return ssid
     }
     
+    // determineMyCurrentLocation set user location on the map
     private func determineMyCurrentLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -47,7 +61,7 @@ class GeotificationViewController: UIViewController, Storyboarded {
         if segue.identifier == Constant.addGeotificationSegue {
             let navigationController = segue.destination as! UINavigationController
             let vc = navigationController.viewControllers.first as! AddGeoficationViewController
-            vc.delegate = viewModel
+            vc.delegate = self
         }
     }
     
@@ -56,6 +70,46 @@ class GeotificationViewController: UIViewController, Storyboarded {
     }
 }
 
+//MARK:- View Delegate
+extension GeotificationViewController: GeotifViewProtocol, AddGeotificationDelegate {
+    // addGeotificationDelegate handle callbacks when geofication added at add geotification page
+    func addGeotificationDelegate(_ geotification: GeotificationViewModel, controller: AddGeoficationViewController) {
+        controller.dismiss(animated: true, completion: nil)
+        let clampedRadius = min(geotification.radius, locationManager.maximumRegionMonitoringDistance)
+        let geotif = GeotificationViewModel(
+            geotif: Geotification(
+                coordinate: geotification.coordinate,
+                radius: clampedRadius,
+                identifier: geotification.identifier,
+                note: geotification.note
+            )
+        )
+        
+        interactor.add(geotif, mapView: mapView)
+        interactor.saveAllGeotifications()
+    }
+    
+    // setGeofence handle callbacks when geofance area is finish to set on the map
+    func setGeofence(mapView: MKMapView, isMaxGeotification: Bool) {
+        DispatchQueue.main.async {
+            self.navigationItem.rightBarButtonItem?.isEnabled = !isMaxGeotification
+        }
+    }
+    
+    // removeGeofence handle callbacks when geofance area is removing from the map
+    func removeGeofence(mapView: MKMapView, isMaxGeotification: Bool) {
+        DispatchQueue.main.async {
+            self.navigationItem.rightBarButtonItem?.isEnabled = !isMaxGeotification
+        }
+    }
+    
+    // showNeededAlert showing related messages to user
+    func showNeededAlert(_ view: UIViewController) {
+        
+    }
+}
+
+//MARK:- Location Delegate
 extension GeotificationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         mapView.showsUserLocation = (status == .authorizedWhenInUse || status == .authorizedAlways)
@@ -74,7 +128,7 @@ extension GeotificationViewController: CLLocationManagerDelegate {
 // MARK: - MapView Delegate
 extension GeotificationViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is Geotification {
+        if annotation is GeotificationViewModel {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: Constant.annotationIdentifier) as? MKPinAnnotationView
             if annotationView == nil {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Constant.annotationIdentifier)
@@ -90,8 +144,8 @@ extension GeotificationViewController: MKMapViewDelegate {
         }
         return nil
     }
-    
-    
+
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // showing geotification circle
         if overlay is MKCircle {
@@ -103,12 +157,11 @@ extension GeotificationViewController: MKMapViewDelegate {
         }
         return MKOverlayRenderer(overlay: overlay)
     }
-    
+
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         // Delete geotification
-        let geotification = view.annotation as! Geotification
-        viewModel.stopMonitoring(geotification: geotification)
-        viewModel.remove(geotification)
-        viewModel.saveAllGeotifications()
+        let geotification = view.annotation as! GeotificationViewModel
+        interactor.remove(geotification, mapView: mapView)
+        interactor.saveAllGeotifications()
     }
 }

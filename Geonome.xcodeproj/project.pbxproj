@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8B5D30F82578801600FC5257 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D30F72578801600FC5257 /* Constant.swift */; };
-		8B5D30FC25788C6C00FC5257 /* GeotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D30FB25788C6C00FC5257 /* GeotificationViewModel.swift */; };
+		8B9DFDCA257AB141003FEADB /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9DFDC9257AB141003FEADB /* Geotification.swift */; };
+		8B9DFDCC257AB1FF003FEADB /* GeotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9DFDCB257AB1FF003FEADB /* GeotificationViewModel.swift */; };
+		8B9DFDD0257AB92F003FEADB /* GeotifInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9DFDCF257AB92F003FEADB /* GeotifInteractor.swift */; };
+		8BA1BDC5257B210900F2107C /* GeotifPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1BDC4257B210900F2107C /* GeotifPresenter.swift */; };
+		8BA1BDC8257B339900F2107C /* GeotifBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1BDC7257B339900F2107C /* GeotifBuilder.swift */; };
 		8BB9B3D425775CDF002C1D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */; };
 		8BB9B3D625775CDF002C1D56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */; };
 		8BB9B3DB25775CDF002C1D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3D925775CDF002C1D56 /* Main.storyboard */; };
@@ -16,7 +20,6 @@
 		8BB9B3E025775CE2002C1D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3DE25775CE2002C1D56 /* LaunchScreen.storyboard */; };
 		8BB9B3EB25777609002C1D56 /* GeotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3EA25777609002C1D56 /* GeotificationViewController.swift */; };
 		8BB9B3EF25778561002C1D56 /* AddGeoficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3EE25778561002C1D56 /* AddGeoficationViewController.swift */; };
-		8BB9B3F125779707002C1D56 /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F025779707002C1D56 /* Geotification.swift */; };
 		8BB9B3F42577BFDE002C1D56 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F32577BFDE002C1D56 /* Utility.swift */; };
 		8BB9B3F92577C956002C1D56 /* Zoo.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F62577C956002C1D56 /* Zoo.gpx */; };
 		8BB9B3FA2577C956002C1D56 /* Home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F72577C956002C1D56 /* Home.gpx */; };
@@ -25,7 +28,11 @@
 
 /* Begin PBXFileReference section */
 		8B5D30F72578801600FC5257 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		8B5D30FB25788C6C00FC5257 /* GeotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotificationViewModel.swift; sourceTree = "<group>"; };
+		8B9DFDC9257AB141003FEADB /* Geotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
+		8B9DFDCB257AB1FF003FEADB /* GeotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotificationViewModel.swift; sourceTree = "<group>"; };
+		8B9DFDCF257AB92F003FEADB /* GeotifInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotifInteractor.swift; sourceTree = "<group>"; };
+		8BA1BDC4257B210900F2107C /* GeotifPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotifPresenter.swift; sourceTree = "<group>"; };
+		8BA1BDC7257B339900F2107C /* GeotifBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotifBuilder.swift; sourceTree = "<group>"; };
 		8BB9B3D025775CDF002C1D56 /* Geonome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,7 +42,6 @@
 		8BB9B3E125775CE2002C1D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB9B3EA25777609002C1D56 /* GeotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotificationViewController.swift; sourceTree = "<group>"; };
 		8BB9B3EE25778561002C1D56 /* AddGeoficationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGeoficationViewController.swift; sourceTree = "<group>"; };
-		8BB9B3F025779707002C1D56 /* Geotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
 		8BB9B3F32577BFDE002C1D56 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		8BB9B3F62577C956002C1D56 /* Zoo.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Zoo.gpx; path = "../../../../Downloads/Geotify/Geotify-Starter/Geotify/Zoo.gpx"; sourceTree = "<group>"; };
 		8BB9B3F72577C956002C1D56 /* Home.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Home.gpx; path = "../../../../Downloads/Geotify/Geotify-Starter/Geotify/Home.gpx"; sourceTree = "<group>"; };
@@ -53,6 +59,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B9DFDCE257AB91F003FEADB /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8B9DFDCF257AB92F003FEADB /* GeotifInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8B9DFDD1257ABD11003FEADB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8BA1BDC4257B210900F2107C /* GeotifPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8BA1BDC6257B337800F2107C /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				8BA1BDC7257B339900F2107C /* GeotifBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 		8BB9B3C725775CDF002C1D56 = {
 			isa = PBXGroup;
 			children = (
@@ -72,11 +102,14 @@
 		8BB9B3D225775CDF002C1D56 /* Geonome */ = {
 			isa = PBXGroup;
 			children = (
-				8BB9B3F52577C8E4002C1D56 /* Dummy Data */,
-				8BB9B3F22577BFCF002C1D56 /* Utils */,
-				8BB9B3E9257775D6002C1D56 /* ViewControllers */,
-				8BB9B3E8257775CF002C1D56 /* ViewModels */,
 				8BB9B3E7257775C5002C1D56 /* Model */,
+				8BB9B3E8257775CF002C1D56 /* ViewModels */,
+				8BA1BDC6257B337800F2107C /* Builder */,
+				8B9DFDD1257ABD11003FEADB /* Presenter */,
+				8B9DFDCE257AB91F003FEADB /* Interactor */,
+				8BB9B3E9257775D6002C1D56 /* ViewControllers */,
+				8BB9B3F22577BFCF002C1D56 /* Utils */,
+				8BB9B3F52577C8E4002C1D56 /* Dummy Data */,
 				8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */,
 				8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */,
 				8BB9B3D925775CDF002C1D56 /* Main.storyboard */,
@@ -90,7 +123,7 @@
 		8BB9B3E7257775C5002C1D56 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8BB9B3F025779707002C1D56 /* Geotification.swift */,
+				8B9DFDC9257AB141003FEADB /* Geotification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -98,7 +131,7 @@
 		8BB9B3E8257775CF002C1D56 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				8B5D30FB25788C6C00FC5257 /* GeotificationViewModel.swift */,
+				8B9DFDCB257AB1FF003FEADB /* GeotificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -209,9 +242,12 @@
 				8BB9B3F42577BFDE002C1D56 /* Utility.swift in Sources */,
 				8BB9B3EB25777609002C1D56 /* GeotificationViewController.swift in Sources */,
 				8BB9B3EF25778561002C1D56 /* AddGeoficationViewController.swift in Sources */,
-				8BB9B3F125779707002C1D56 /* Geotification.swift in Sources */,
+				8BA1BDC8257B339900F2107C /* GeotifBuilder.swift in Sources */,
+				8B9DFDCA257AB141003FEADB /* Geotification.swift in Sources */,
+				8BA1BDC5257B210900F2107C /* GeotifPresenter.swift in Sources */,
+				8B9DFDCC257AB1FF003FEADB /* GeotificationViewModel.swift in Sources */,
 				8BB9B3D425775CDF002C1D56 /* AppDelegate.swift in Sources */,
-				8B5D30FC25788C6C00FC5257 /* GeotificationViewModel.swift in Sources */,
+				8B9DFDD0257AB92F003FEADB /* GeotifInteractor.swift in Sources */,
 				8BB9B3D625775CDF002C1D56 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

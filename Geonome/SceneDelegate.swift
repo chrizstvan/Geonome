@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     let locationManager = CLLocationManager()
-    var vc = GeotificationViewController.instantiate()
+    var vc = GeotifBuilder().build()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let ws = (scene as? UIWindowScene) else { return }
@@ -61,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // note handle passing string note to alert
     func note(from identifier: String) -> String? {
-        let geotifications = Geotification.allGeotifications()
+        let geotifications = GeotificationViewModel.allGeotifications()
         guard let matched = geotifications.filter({ $0.identifier == identifier}).first else { return nil }
         return matched.note
     }

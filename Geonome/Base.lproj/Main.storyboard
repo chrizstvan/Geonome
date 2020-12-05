@@ -30,11 +30,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Area" id="Vt4-o5-O2Y">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="CurrentLocation" id="KoE-Fl-ALL">
+                            <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="zoomCurrentLocation:" destination="vLU-y5-ox6" id="svY-3v-tKc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tg6-bg-7cN">
+                            <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="qob-LM-bpk" kind="presentation" identifier="addGeotification" id="Ozp-QB-zao"/>
                             </connections>
@@ -163,17 +165,20 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Geotification" id="7ul-H3-Vua">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="FtC-0H-5lO">
+                            <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="onCancel:" destination="1AZ-ag-bIw" id="BDa-HX-gcu"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Add" id="vPY-6o-SQY">
+                                <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAdd:" destination="1AZ-ag-bIw" id="yFq-CT-GVF"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="CurrentLocation" id="Vid-Zf-nmZ">
+                                <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onZoomCurrentLocation:" destination="1AZ-ag-bIw" id="Q2U-ku-v4q"/>
                                 </connections>

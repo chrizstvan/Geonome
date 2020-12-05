@@ -1,8 +1,8 @@
 //
-//  Geotification.swift
+//  Geotif.swift
 //  Geonome
 //
-//  Created by Chris Stev on 02/12/20.
+//  Created by Chris Stev on 05/12/20.
 //  Copyright © 2020 Setel. All rights reserved.
 //
 
@@ -10,26 +10,14 @@ import Foundation
 import MapKit
 import CoreLocation
 
-class Geotification: NSObject, Codable, MKAnnotation {
-    enum CodingKeys: String, CodingKey {
-        case latitude, longitude, radius, identifier, note, eventType
-    }
-    
+struct Geotification: Codable {
     var coordinate: CLLocationCoordinate2D
     var radius: CLLocationDistance
     var identifier: String
     var note: String
     
-    var title: String? {
-        if note.isEmpty {
-            return "No Note"
-        }
-        
-        return note
-    }
-    
-    var subtitle: String? {
-        "Radius: \(radius)m - \(note) Area"
+    enum CodingKeys: String, CodingKey {
+        case latitude, longitude, radius, identifier, note, eventType
     }
     
     init(
@@ -44,7 +32,7 @@ class Geotification: NSObject, Codable, MKAnnotation {
       self.note = note
     }
     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let latitude = try values.decode(Double.self, forKey: .latitude)
         let longitude = try values.decode(Double.self, forKey: .longitude)
@@ -64,18 +52,4 @@ class Geotification: NSObject, Codable, MKAnnotation {
     }
 }
 
-// should be at view model
-extension Geotification {
-  public class func allGeotifications() -> [Geotification] {
-    guard let savedData = UserDefaults.standard.data(forKey: PreferencesKeys.savedItems) else {
-        return []
-    }
-    
-    let decoder = JSONDecoder()
-    if let savedGeotifications = try? decoder.decode(Array.self, from: savedData) as [Geotification] {
-      return savedGeotifications
-    }
-    
-    return []
-  }
-}
+

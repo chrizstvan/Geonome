@@ -10,13 +10,7 @@ import UIKit
 import MapKit
 
 protocol AddGeotificationDelegate {
-    func addGeotificationDelegate(
-      _ controller: AddGeoficationViewController,
-      didAddCoordinate coordinate: CLLocationCoordinate2D,
-      radius: Double,
-      identifier: String,
-      note: String
-    )
+    func addGeotificationDelegate(_ geotification: GeotificationViewModel, controller: AddGeoficationViewController)
 }
 
 class AddGeoficationViewController: UITableViewController {
@@ -46,11 +40,16 @@ class AddGeoficationViewController: UITableViewController {
     }
     
     @IBAction func onAdd(_ sender: AnyObject) {
-        let coordinate = mapView.centerCoordinate
-        let radius = Double(radiusTextField.text!) ?? 0
-        let identifier = NSUUID().uuidString
-        let note = noteTextField.text
-        delegate?.addGeotificationDelegate(self, didAddCoordinate: coordinate, radius: radius, identifier: identifier, note: note!)
+        delegate?.addGeotificationDelegate(
+            GeotificationViewModel(
+                geotif: Geotification(
+                    coordinate: mapView.centerCoordinate,
+                    radius:  Double(radiusTextField.text!) ?? 0,
+                    identifier: NSUUID().uuidString,
+                    note: noteTextField.text ?? ""
+                )
+            ), controller: self
+        )
     }
     
     @IBAction func onZoomCurrentLocation(_ sender: AnyObject) {
