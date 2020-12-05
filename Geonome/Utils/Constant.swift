@@ -21,4 +21,6 @@ struct Constant {
     Geotify permission to access the device location.
     """
     static let monitoringNotAvailableMessages = "Geofencing is not supported on this device!"
+    static let statusOutside = "Outside Area"
+    static let statusUnknown = "Unknown"
 }

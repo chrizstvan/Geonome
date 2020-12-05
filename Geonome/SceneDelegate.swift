@@ -34,50 +34,55 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         locationManager.requestAlwaysAuthorization()
     }
     
-    // handleEvent triger notification when condition meet
-    func didEnterGeoArea(for region: CLRegion!) {
+    // showingAreaStatus shows status to user or handle triger notification when condition meet
+    func showingAreaStatus(for region: CLRegion!, state: CLRegionState) {
         // Show an alert if application is active
         if UIApplication.shared.applicationState == .active {
             guard let message = note(from: region.identifier) else { return }
-            vc.title = "Inside \(message) Area"
+            vc.title = state == .inside ? "Inside \(message) Area"
+                : state == .outside ? Constant.statusOutside
+                : Constant.statusUnknown
         } else {
             // Otherwise present a local notification
             guard let body = note(from: region.identifier) else { return }
             let notificationContent = UNMutableNotificationContent()
-            notificationContent.body = "Inside \(body) Area"
             notificationContent.sound = UNNotificationSound.default
             notificationContent.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "location_change",
-                                                content: notificationContent,
-                                                trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("Error: \(error)")
-                }
-            }
+            notificationContent.body = state == .inside ? "Inside \(body) Area"
+                : state == .outside ? Constant.statusOutside
+                : Constant.statusUnknown
+            
+            sendNotification(with: notificationContent)
         }
     }
     
     // note handle passing string note to alert
-    func note(from identifier: String) -> String? {
+    private func note(from identifier: String) -> String? {
         let geotifications = GeotificationViewModel.allGeotifications()
         guard let matched = geotifications.filter({ $0.identifier == identifier}).first else { return nil }
         return matched.note
     }
+    
+    // sendNotification hanlde triggering local notification
+    private func sendNotification(with content: UNMutableNotificationContent) {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: "location_change",
+            content: content,
+            trigger: trigger
+        )
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error: \(error)")
+            }
+        }
+    }
 }
 
 extension SceneDelegate: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            didEnterGeoArea(for: region)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            vc.title = "Outside Area"
-        }
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        showingAreaStatus(for: region, state: state)
     }
 }
 
