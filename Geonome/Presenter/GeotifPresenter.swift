@@ -10,8 +10,18 @@ import Foundation
 import MapKit
 
 protocol GeotifPresenterProtocol {
-    func addAnnotationAndRadiusOverlay(geotif: GeotificationViewModel, mapView: MKMapView, isMaxGeotifications: Bool)
-    func removeAnnotationAndRadiusOverlay(geotif: GeotificationViewModel, mapView: MKMapView, isMaxGeotifications: Bool)
+    func addAnnotationAndRadiusOverlay(
+        geotif: GeotificationViewModel,
+        mapView: MKMapView,
+        isMaxGeotifications: Bool
+    )
+    
+    func removeAnnotationAndRadiusOverlay(
+        geotif: GeotificationViewModel,
+        mapView: MKMapView,
+        isMaxGeotifications: Bool
+    )
+    
     func presentAlert(title: String, messages: String)
 }
 
@@ -19,7 +29,11 @@ final class GeotifPresenter: NSObject, GeotifPresenterProtocol {
     weak var view: GeotifViewProtocol?
     
     // addAnnotationAndRadiusOverlay presenting overlay and annotation to map
-    func addAnnotationAndRadiusOverlay(geotif: GeotificationViewModel, mapView: MKMapView, isMaxGeotifications: Bool) {
+    func addAnnotationAndRadiusOverlay(
+        geotif: GeotificationViewModel,
+        mapView: MKMapView,
+        isMaxGeotifications: Bool
+    ) {
         mapView.addAnnotation(geotif)
         mapView.addOverlay(
             MKCircle(
@@ -32,7 +46,11 @@ final class GeotifPresenter: NSObject, GeotifPresenterProtocol {
     }
     
     // removeAnnotationAndRadiusOverlay remove overlay and annotation from map
-    func removeAnnotationAndRadiusOverlay(geotif: GeotificationViewModel, mapView: MKMapView, isMaxGeotifications: Bool) {
+    func removeAnnotationAndRadiusOverlay(
+        geotif: GeotificationViewModel,
+        mapView: MKMapView,
+        isMaxGeotifications: Bool
+    ) {
         mapView.removeAnnotation(geotif)
         let overlays = mapView.overlays
         
@@ -55,9 +73,7 @@ final class GeotifPresenter: NSObject, GeotifPresenterProtocol {
     
     // presentAlert showing alert to related view
     func presentAlert(title: String, messages: String) {
-        let vc = UIViewController()
-        vc.showAlert(withTitle: title, message: messages)
-        view?.showNeededAlert(vc)
+        view?.showNeededAlert(title: title, messages: messages)
     }
 }
 

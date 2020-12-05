@@ -33,6 +33,7 @@
 		8B9DFDCF257AB92F003FEADB /* GeotifInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotifInteractor.swift; sourceTree = "<group>"; };
 		8BA1BDC4257B210900F2107C /* GeotifPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotifPresenter.swift; sourceTree = "<group>"; };
 		8BA1BDC7257B339900F2107C /* GeotifBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotifBuilder.swift; sourceTree = "<group>"; };
+		8BA1BDC9257BFD2900F2107C /* Geonome-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Geonome-Bridging-Header.h"; sourceTree = "<group>"; };
 		8BB9B3D025775CDF002C1D56 /* Geonome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geonome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB9B3D325775CDF002C1D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB9B3D525775CDF002C1D56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 				8BB9B3DC25775CE2002C1D56 /* Assets.xcassets */,
 				8BB9B3DE25775CE2002C1D56 /* LaunchScreen.storyboard */,
 				8BB9B3E125775CE2002C1D56 /* Info.plist */,
+				8BA1BDC9257BFD2900F2107C /* Geonome-Bridging-Header.h */,
 			);
 			path = Geonome;
 			sourceTree = "<group>";
@@ -401,6 +403,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.setel.test.Geonome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Geonome/Geonome-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -419,6 +422,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.setel.test.Geonome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Geonome/Geonome-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

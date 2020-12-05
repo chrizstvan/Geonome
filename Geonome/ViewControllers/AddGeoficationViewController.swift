@@ -10,7 +10,10 @@ import UIKit
 import MapKit
 
 protocol AddGeotificationDelegate {
-    func addGeotificationDelegate(_ geotification: GeotificationViewModel, controller: AddGeoficationViewController)
+    func addGeotificationDelegate(
+        _ geotification: GeotificationViewModel,
+        controller: AddGeoficationViewController
+    )
 }
 
 class AddGeoficationViewController: UITableViewController {
