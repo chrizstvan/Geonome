@@ -22,6 +22,7 @@ iOS 13.7+
 <img width="227" alt="Dummy data" src="https://user-images.githubusercontent.com/34307518/101279952-a5eb2400-37f8-11eb-83bc-9b8f09096944.png">
 
 3. First of all you need to add or create geofance area using "+" button on the trailing of navigation bar
+<img width="266" alt="Screen Shot 2020-12-06 at 22 00 57" src="https://user-images.githubusercontent.com/34307518/101283703-a8f10f00-380e-11eb-939b-f63df242bc20.png">
 
 4. To begin simulating the locations in the GPX file, build and run the project. When the app launches the main view controller, go back to Xcode, select the Location icon in the Debug bar and choose SimulatedLocations
 <img width="489" alt="simulated" src="https://user-images.githubusercontent.com/34307518/101279955-aaafd800-37f8-11eb-9f5a-b24ac664d9f6.png">
