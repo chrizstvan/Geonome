@@ -21,9 +21,9 @@
 		8BB9B3EB25777609002C1D56 /* GeotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3EA25777609002C1D56 /* GeotificationViewController.swift */; };
 		8BB9B3EF25778561002C1D56 /* AddGeoficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3EE25778561002C1D56 /* AddGeoficationViewController.swift */; };
 		8BB9B3F42577BFDE002C1D56 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F32577BFDE002C1D56 /* Utility.swift */; };
-		8BB9B3F92577C956002C1D56 /* Zoo.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F62577C956002C1D56 /* Zoo.gpx */; };
-		8BB9B3FA2577C956002C1D56 /* Home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F72577C956002C1D56 /* Home.gpx */; };
-		8BB9B3FB2577C956002C1D56 /* SimulatedLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BB9B3F82577C956002C1D56 /* SimulatedLocations.gpx */; };
+		8BF12B63257D0E300090E581 /* Home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BF12B62257D0E300090E581 /* Home.gpx */; };
+		8BF12B65257D0E770090E581 /* SimulatedLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BF12B64257D0E770090E581 /* SimulatedLocations.gpx */; };
+		8BF12B67257D0EA80090E581 /* Zoo.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 8BF12B66257D0EA80090E581 /* Zoo.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,9 +44,9 @@
 		8BB9B3EA25777609002C1D56 /* GeotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeotificationViewController.swift; sourceTree = "<group>"; };
 		8BB9B3EE25778561002C1D56 /* AddGeoficationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGeoficationViewController.swift; sourceTree = "<group>"; };
 		8BB9B3F32577BFDE002C1D56 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		8BB9B3F62577C956002C1D56 /* Zoo.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Zoo.gpx; path = "../../../../Downloads/Geotify/Geotify-Starter/Geotify/Zoo.gpx"; sourceTree = "<group>"; };
-		8BB9B3F72577C956002C1D56 /* Home.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Home.gpx; path = "../../../../Downloads/Geotify/Geotify-Starter/Geotify/Home.gpx"; sourceTree = "<group>"; };
-		8BB9B3F82577C956002C1D56 /* SimulatedLocations.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SimulatedLocations.gpx; path = "../../../../Downloads/Geotify/Geotify-Starter/Geotify/SimulatedLocations.gpx"; sourceTree = "<group>"; };
+		8BF12B62257D0E300090E581 /* Home.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.gpx; sourceTree = "<group>"; };
+		8BF12B64257D0E770090E581 /* SimulatedLocations.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SimulatedLocations.gpx; sourceTree = "<group>"; };
+		8BF12B66257D0EA80090E581 /* Zoo.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Zoo.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +159,9 @@
 		8BB9B3F52577C8E4002C1D56 /* Dummy Data */ = {
 			isa = PBXGroup;
 			children = (
-				8BB9B3F72577C956002C1D56 /* Home.gpx */,
-				8BB9B3F82577C956002C1D56 /* SimulatedLocations.gpx */,
-				8BB9B3F62577C956002C1D56 /* Zoo.gpx */,
+				8BF12B62257D0E300090E581 /* Home.gpx */,
+				8BF12B64257D0E770090E581 /* SimulatedLocations.gpx */,
+				8BF12B66257D0EA80090E581 /* Zoo.gpx */,
 			);
 			path = "Dummy Data";
 			sourceTree = "<group>";
@@ -224,12 +224,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB9B3F92577C956002C1D56 /* Zoo.gpx in Resources */,
+				8BF12B67257D0EA80090E581 /* Zoo.gpx in Resources */,
+				8BF12B65257D0E770090E581 /* SimulatedLocations.gpx in Resources */,
 				8BB9B3E025775CE2002C1D56 /* LaunchScreen.storyboard in Resources */,
-				8BB9B3FA2577C956002C1D56 /* Home.gpx in Resources */,
 				8BB9B3DD25775CE2002C1D56 /* Assets.xcassets in Resources */,
+				8BF12B63257D0E300090E581 /* Home.gpx in Resources */,
 				8BB9B3DB25775CDF002C1D56 /* Main.storyboard in Resources */,
-				8BB9B3FB2577C956002C1D56 /* SimulatedLocations.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
