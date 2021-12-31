@@ -2,7 +2,6 @@
 
 ### Description
 
-Hi, my name Christian Stevanus and this is Geonome, a mini app that I worked on for about a week as a take home technical test from Setel.
 Genome is an application that will detect if a device is located inside of a geofence area.
 The application will send notification or update status if the device is inside or outside the geofence area, 
 that's why in this app it's called geotification, because it's sending notification :)
